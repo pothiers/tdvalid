@@ -1,3 +1,5 @@
+env_tdvalid/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -1,5 +1,5 @@
 #! /usr/bin/env python3
-' Create XML version of a FITS header.'
+"""Create XML version of a FITS header."""
 
 import sys
 import argparse
