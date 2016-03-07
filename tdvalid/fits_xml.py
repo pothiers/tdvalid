@@ -39,9 +39,10 @@ used_fields=set([
     'TIME-OBS',
     ])
     
-def fits_to_xml(fits_fname, xml_file, instrument='NA'):
+def fits_to_xml(fits_fname, xml_file=None, instrument='NA'):
     hdulist = pyfits.open(fits_fname)
-    xmlstr = '<fitsHeader instrument="{}">\n'.format(instrument)
+    #xmlstr = '<fitsHeader instrument="{}">\n'.format(instrument)
+    xmlstr = '<fitsHeader>\n'
     #!print('DBG: hdr={}'.format(hdulist[0].header.tostring()))
     hdr = hdulist[0].header
     for k,v in hdr.items():
@@ -54,7 +55,9 @@ def fits_to_xml(fits_fname, xml_file, instrument='NA'):
         #print('k={}, v={}'.format(k,v))
         xmlstr += '  <{key}>{value}</{key}>\n'.format(key=k, value=v)
     xmlstr += '</fitsHeader>\n'
-    print(xmlstr, file=xml_file)
+    if xml_file != None:
+        print(xmlstr, file=xml_file)
+    return xmlstr
 
 
 ##############################################################################
