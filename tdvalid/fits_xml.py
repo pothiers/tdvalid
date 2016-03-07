@@ -10,13 +10,45 @@ import astropy.io.fits as pyfits
 # To generate very rough XSD:
 #   http://www.thaiopensource.com/relaxng/trang.html (best; install java)
 #   http://xmlgrid.net/xml2xsd.html (online)
+#
+# Validate with:
+#   fits_to_xml(myfile.fits, myfile.fits.xml)
+#   java -jar trang.jar myfile.fits.xml ... <instrum>.xsd
+#   xmllint --schema <instrum>.xsd myfile.fits.xml
 
-def fits_to_xml(fits_fname, xml_file):
+
+used_fields=set([
+    'DATE',
+    'DATE-OBS',
+    'DTACQNAM',
+    'DTCALDAT',
+    'DTINSTRU',
+    'DTNSANAM',
+    'DTPROPID',
+    'DTSITE',
+    'DTTELESC',
+    'IMAGETYP',
+    'OBSERVAT',
+    'OBSTYPE',
+    'PLDSID',
+    'PLQNAME',
+    'PLQUEUE',
+    'PROCTYPE',
+    'PRODTYPE',
+    'SIMPLE',
+    'TIME-OBS',
+    ])
+    
+def fits_to_xml(fits_fname, xml_file, instrument='NA'):
     hdulist = pyfits.open(fits_fname)
-    xmlstr = '<fitsHeader>\n'
+    xmlstr = '<fitsHeader instrument="{}">\n'.format(instrument)
     #!print('DBG: hdr={}'.format(hdulist[0].header.tostring()))
     hdr = hdulist[0].header
     for k,v in hdr.items():
+        if k not in used_fields:
+            continue
+        if k == 'COMMENT': 
+            continue
         if k == '': 
             continue
         #print('k={}, v={}'.format(k,v))
@@ -35,19 +67,21 @@ def main():
         epilog='EXAMPLE: %(prog)s a b"'
         )
     parser.add_argument('--version', action='version', version='1.0.1')
-    parser.add_argument('infile', type=argparse.FileType('r'),
-                        help='Input file')
-    parser.add_argument('outfile', type=argparse.FileType('w'),
-                        help='Output output')
-
+    parser.add_argument('fitsfile', type=argparse.FileType('r'),
+                        help='Input FITS file. Read header from this.')
+    parser.add_argument('xmlfile', type=argparse.FileType('w'),
+                        help='Output XML file. XML format of FITS header.')
+    parser.add_argument('--instrument',
+                        help='Name of instrument',
+                        default='NA')
     parser.add_argument('--loglevel',
                         help='Kind of diagnostic output',
                         choices=['CRTICAL', 'ERROR', 'WARNING',
                                  'INFO', 'DEBUG'],
                         default='WARNING')
     args = parser.parse_args()
-    args.infile.close()
-    args.infile = args.infile.name
+    args.fitsfile.close()
+    args.fitsfile = args.fitsfile.name
     #!args.outfile.close()
     #!args.outfile = args.outfile.name
 
@@ -62,7 +96,7 @@ def main():
                         datefmt='%m-%d %H:%M')
     logging.debug('Debug output is enabled in %s !!!', sys.argv[0])
  
-    fits_to_xml(args.infile, args.outfile)
+    fits_to_xml(args.fitsfile, args.xmlfile, instrument=args.instrument)
 
 if __name__ == '__main__':
     main()

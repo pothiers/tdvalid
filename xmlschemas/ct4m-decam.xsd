@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="fitsHeader">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="SIMPLE"/>
+        <xs:element ref="PROCTYPE"/>
+        <xs:element ref="PRODTYPE"/>
+        <xs:element ref="OBSERVAT"/>
+        <xs:element ref="DATE-OBS"/>
+        <xs:element ref="TIME-OBS"/>
+        <xs:element ref="OBSTYPE"/>
+      </xs:sequence>
+      <xs:attribute name="instrument" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SIMPLE" type="xs:NCName"/>
+  <xs:element name="PROCTYPE" type="xs:NCName"/>
+  <xs:element name="PRODTYPE" type="xs:NCName"/>
+  <xs:element name="OBSERVAT" type="xs:NCName"/>
+  <xs:element name="DATE-OBS" type="xs:NMTOKEN"/>
+  <xs:element name="TIME-OBS" type="xs:NMTOKEN"/>
+  <xs:element name="OBSTYPE" type="xs:string"/>
+</xs:schema>
