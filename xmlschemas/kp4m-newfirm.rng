@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <start>
+    <element name="fitsHeader">
+      <attribute name="instrument">
+        <data type="NCName"/>
+      </attribute>
+      <element name="SIMPLE">
+        <data type="NCName"/>
+      </element>
+      <element name="OBSTYPE">
+        <data type="NCName"/>
+      </element>
+      <element name="DATE-OBS">
+        <data type="NMTOKEN"/>
+      </element>
+      <element name="TIME-OBS">
+        <data type="NMTOKEN"/>
+      </element>
+      <element name="OBSERVAT">
+        <data type="NCName"/>
+      </element>
+      <element name="PROCTYPE">
+        <data type="NCName"/>
+      </element>
+    </element>
+  </start>
+</grammar>

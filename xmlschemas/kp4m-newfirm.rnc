@@ -1,0 +1,12 @@
+default namespace = ""
+
+start =
+  element fitsHeader {
+    attribute instrument { xsd:NCName },
+    element SIMPLE { xsd:NCName },
+    element OBSTYPE { xsd:NCName },
+    element DATE-OBS { xsd:NMTOKEN },
+    element TIME-OBS { xsd:NMTOKEN },
+    element OBSERVAT { xsd:NCName },
+    element PROCTYPE { xsd:NCName }
+  }

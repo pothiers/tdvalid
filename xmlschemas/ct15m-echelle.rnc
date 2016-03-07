@@ -1,0 +1,7 @@
+default namespace = ""
+
+start =
+  element fitsHeader {
+    attribute instrument { xsd:NCName },
+    element SIMPLE { xsd:NCName }
+  }

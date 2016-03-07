@@ -1,0 +1,10 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT fitsHeader (SIMPLE)>
+<!ATTLIST fitsHeader
+  xmlns CDATA #FIXED ''
+  instrument NMTOKEN #REQUIRED>
+
+<!ELEMENT SIMPLE (#PCDATA)>
+<!ATTLIST SIMPLE
+  xmlns CDATA #FIXED ''>

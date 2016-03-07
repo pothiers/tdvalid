@@ -73,6 +73,9 @@ for dir in ~/data/scraped/mtn_raw/*; do
         #! echo "Generate XML for: $fits"
         fits_xml.py --instrument $instrum $fits $fits.xml
     done
+    java -jar $jardir/trang.jar $dir/*.fits.fz.xml $instrum.rng
+    java -jar $jardir/trang.jar $dir/*.fits.fz.xml $instrum.rnc
+    java -jar $jardir/trang.jar $dir/*.fits.fz.xml $instrum.dtd
     java -jar $jardir/trang.jar $dir/*.fits.fz.xml $instrum.xsd    
 done
 
