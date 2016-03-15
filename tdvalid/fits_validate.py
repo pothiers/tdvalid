@@ -6,9 +6,12 @@ import argparse
 import logging
 import subprocess
 
-import fits_xml as fx
+import pykwalify.core as kwal
 
-def validate_header(xmlheader, rng=None):
+#import fits_xml as fx
+from . import fits_yaml as fy
+
+def validate_xml_header(xmlheader, rng=None):
     #!print('header={}'.format(xmlheader))
     try:
         str = subprocess.check_output(['xmllint',
@@ -22,6 +25,11 @@ def validate_header(xmlheader, rng=None):
         return False
     return str
 
+def validate_yaml(hdict, schema):
+    k = kwal.Core(source_data=hdict, schema_files=[schema])
+    k.validate()
+    return k
+
 ##############################################################################
 
 def main():
@@ -34,9 +42,11 @@ def main():
     parser.add_argument('--version', action='version', version='1.0.1')
     parser.add_argument('fitsfile', type=argparse.FileType('r'),
                         help='Input FITS file. Read header from this.')
-    parser.add_argument('schema',
-                        help='Relax NG (.rng) schema file for instrument',
-                        default='NA')
+    #!parser.add_argument('xmlschema',
+    #!                    help='Relax NG (.rng) schema file for instrument',
+    #!                    default='NA')
+    parser.add_argument('yamlschema',
+                        help='YAML schema file' )
     parser.add_argument('--loglevel',
                         help='Kind of diagnostic output',
                         choices=['CRTICAL', 'ERROR', 'WARNING',
@@ -54,8 +64,10 @@ def main():
                         datefmt='%m-%d %H:%M')
     logging.debug('Debug output is enabled in %s !!!', sys.argv[0])
  
-    xmlheader = fx.fits_to_xml(args.fitsfile)
-    print(validate_header(xmlheader, rng=args.schema))
+    #!xmlheader = fy.fits_to_xml(args.fitsfile)
+    #!print(validate_xml_header(xmlheader, rng=args.xmlschema))
+    hdict = fy.get_hdr_as_dict(args.fitsfile)
+    validate_yaml(hdict, args.yamlschema)
 
 if __name__ == '__main__':
     main()

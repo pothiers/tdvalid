@@ -1,5 +1,10 @@
 #! /usr/bin/env python3
-"""Create XML version of a FITS header."""
+"""Create YAML version of a FITS header."""
+# For schema language, see:
+#   https://raw.githubusercontent.com/Grokzen/pykwalify/master/docs/Validation%20Rules.md
+# The original kwalify spec for schema is:
+#   http://www.kuwata-lab.com/kwalify/ruby/users-guide.01.html#schema
+
 
 import sys
 import argparse
