@@ -1,0 +1,20 @@
+type: map
+mapping:
+  "DATE-OBS":
+    required: yes
+    type: timestamp
+  "OBSERVAT":
+    required: yes
+    type: str
+    pattern: ^KPNO$
+  "OBSTYPE":
+    required: yes
+    type: str
+    enum: ['dome flat', 'zero', 'focus', 'object']
+  "SIMPLE":
+    required: yes
+    type: bool
+  "TIME-OBS":
+    required: yes
+    type: timestamp
+    
