@@ -1,3 +1,4 @@
+# Schema for valid BOK FITS header (rendered as YAML).
 type: map
 mapping:
   "DATE-OBS":

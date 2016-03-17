@@ -1,0 +1,94 @@
+# For schema language, see:
+#   https://github.com/Grokzen/pykwalify/blob/master/docs/Validation%20Rules.md
+# The original kwalify spec for schema is:
+#   http://www.kuwata-lab.com/kwalify/ruby/users-guide.01.html#schema
+
+# Add descriptions for each field!!!
+
+type: map
+mapping:
+  "options":
+    type: map
+    mapping:
+      "AAPROPID":
+        type:       str
+      "DTSUBMIT":
+        type:       str
+      "DTPIAFFL":
+        type:       str
+      "DTCOPYRI":
+        type:       str
+      "DTOBSERV":
+        type:       str
+      "OBSERVAT":
+        type:       str
+      "DTPI":
+        type:       str
+      "DTTITLE": 
+        type:       str
+      "DTPROPID":
+        type:       str
+      "INSTRUME":
+        type:       str
+      "DTINSTRU":
+        type:       str
+        enum:       ['90prime', 'andicam', 'arcon', 'bench', 'cosmos',
+                    'decam', 'echelle', 'goodman', 'hdi', 'mosaic',
+                    'mosaic3', 'newfirm', 'osiris', 'sami', 'soi',
+                    'spartan', 'triplespec', 'whirc']
+      "DTSITE":
+        type:       str
+        enum:       ['cp', 'ct', 'kp']
+      "DTTELESC":
+        type:       str
+        enum:      ['bok23m', 'ct09m', 'ct13m', 'ct15m', 'ct4m',
+                    'kp09m', 'kp35m', 'kp4m', 'soar', 'WIYN']
+      "PROCTYPE":
+        type:       str
+        enum:       ['raw', 'instcal', 'mastercal', 'projected',
+                     'stacked','skysub']
+      "PRODTYPE": 
+        type:       str 
+        enum:       ['image', 'Image', 'image 2nd version 1', 'dqmask',
+                     'expmap','graphics (size)', 'weight']
+  "params":
+    type: map
+    mapping:
+      "job_tag":
+        type:       str  #e.g. TADASMOKE
+      "dry_run":
+        type:       str  # definitions???
+      "OPS_PREAPPLY_UPDATE":
+        type:       str
+        enum:       ['YES', 'NO']
+      "calchdr":
+        type:       seq   
+        sequence:
+          - type: str
+            enum: ['fixTriplespec',
+                   'trustHdrPropid', 
+                   'trustSchedPropid', 
+                   'trustSchedOrAAPropid', 
+                   'lookupPROPID', 
+                   'tsepDATEOBS', 
+                   'addTimeToDATEOBS', 
+                   'DATEOBSfromDATE', 
+                   'DTCALDATfromDATEOBStus', 
+                   'DTCALDATfromDATEOBSchile', 
+                   'PROPIDtoDT', 
+                   'PROPIDplusCentury', 
+                   'INSTRUMEtoDT', 
+                   'IMAGTYPEtoOBSTYPE', 
+                   'bokOBSID']
+      "fpack":
+        type:       str
+        enum:       ['yes', 'no'] # default = None!!!
+      "test_resubmit":
+        type:       str
+      "source":
+        type:       str
+      "warn_unknown":
+        type:       str
+      "jobid_type":
+        type:       str  # ENUM!!!
+        enum:       ['plain', 'seconds', 'False']

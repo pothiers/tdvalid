@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 """Create YAML version of a FITS header."""
 # For schema language, see:
-#   https://raw.githubusercontent.com/Grokzen/pykwalify/master/docs/Validation%20Rules.md
+#   https://github.com/Grokzen/pykwalify/blob/master/docs/Validation%20Rules.md
 # The original kwalify spec for schema is:
 #   http://www.kuwata-lab.com/kwalify/ruby/users-guide.01.html#schema
 
