@@ -7,61 +7,61 @@
 
 type: map
 mapping:
-  "options":
+  options:
     type: map
     mapping:
-      "AAPROPID":
+      AAPROPID:
         type:       str
-      "DTSUBMIT":
+      DTSUBMIT:
         type:       str
-      "DTPIAFFL":
+      DTPIAFFL:
         type:       str
-      "DTCOPYRI":
+      DTCOPYRI:
         type:       str
-      "DTOBSERV":
+      DTOBSERV:
         type:       str
-      "OBSERVAT":
+      OBSERVAT:
         type:       str
-      "DTPI":
+      DTPI:
         type:       str
-      "DTTITLE": 
+      DTTITLE: 
         type:       str
-      "DTPROPID":
+      DTPROPID:
         type:       str
-      "INSTRUME":
+      INSTRUME:
         type:       str
-      "DTINSTRU":
+      DTINSTRU:
         type:       str
         enum:       ['90prime', 'andicam', 'arcon', 'bench', 'cosmos',
                     'decam', 'echelle', 'goodman', 'hdi', 'mosaic',
                     'mosaic3', 'newfirm', 'osiris', 'sami', 'soi',
                     'spartan', 'triplespec', 'whirc']
-      "DTSITE":
+      DTSITE:
         type:       str
         enum:       ['cp', 'ct', 'kp']
-      "DTTELESC":
+      DTTELESC:
         type:       str
         enum:      ['bok23m', 'ct09m', 'ct13m', 'ct15m', 'ct4m',
                     'kp09m', 'kp35m', 'kp4m', 'soar', 'WIYN']
-      "PROCTYPE":
+      PROCTYPE:
         type:       str
         enum:       ['raw', 'instcal', 'mastercal', 'projected',
                      'stacked','skysub']
-      "PRODTYPE": 
+      PRODTYPE: 
         type:       str 
         enum:       ['image', 'Image', 'image 2nd version 1', 'dqmask',
                      'expmap','graphics (size)', 'weight']
-  "params":
+  params:
     type: map
     mapping:
-      "job_tag":
+      job_tag:
         type:       str  #e.g. TADASMOKE
-      "dry_run":
+      dry_run:
         type:       str  # definitions???
-      "OPS_PREAPPLY_UPDATE":
+      OPS_PREAPPLY_UPDATE:
         type:       str
         enum:       ['YES', 'NO']
-      "calchdr":
+      calchdr:
         type:       seq   
         sequence:
           - type: str
@@ -80,15 +80,15 @@ mapping:
                    'INSTRUMEtoDT', 
                    'IMAGTYPEtoOBSTYPE', 
                    'bokOBSID']
-      "fpack":
+      fpack:
         type:       str
         enum:       ['yes', 'no'] # default = None!!!
-      "test_resubmit":
+      test_resubmit:
         type:       str
-      "source":
+      source:
         type:       str
-      "warn_unknown":
+      warn_unknown:
         type:       str
-      "jobid_type":
+      jobid_type:
         type:       str  # ENUM!!!
         enum:       ['plain', 'seconds', 'False']
