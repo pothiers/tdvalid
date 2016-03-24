@@ -7,7 +7,7 @@
 
 type: map
 mapping:
-  options:
+  options:  # FITS header fieldnames.  These values overwrite before ingest.
     type: map
     mapping:
       AAPROPID:
@@ -43,52 +43,66 @@ mapping:
         type:       str
         enum:      ['bok23m', 'ct09m', 'ct13m', 'ct15m', 'ct4m',
                     'kp09m', 'kp35m', 'kp4m', 'soar', 'WIYN']
-      PROCTYPE:
+      PROCTYPE: # Processing Type
         type:       str
         enum:       ['raw', 'instcal', 'mastercal', 'projected',
                      'stacked','skysub']
-      PRODTYPE: 
+      PRODTYPE: # Product Type
         type:       str 
         enum:       ['image', 'Image', 'image 2nd version 1', 'dqmask',
                      'expmap','graphics (size)', 'weight']
   params:
     type: map
     mapping:
-      job_tag:
+      job_tag: # tag added to end of FITS basename (prefixed with underscore)
         type:       str  #e.g. TADASMOKE
-      dry_run:
-        type:       str  # definitions???
-      OPS_PREAPPLY_UPDATE:
+      dry_run: # "yes": means report "success" if file seems valid,
+               # but do not ingest it.
+        type:       str  
+        enum:       ['yes', 'no']
+      OPS_PREAPPLY_UPDATE: # "yes" means apply options before validation
         type:       str
-        enum:       ['YES', 'NO']
-      calchdr:
+        enum:       ['yes', 'no']
+      calchdr: # "mapping functions"
+        # These functions create/modify new FITS fields from
+        # original field values.
         type:       seq   
         sequence:
           - type: str
-            enum: ['fixTriplespec',
-                   'trustHdrPropid', 
-                   'trustSchedPropid', 
-                   'trustSchedOrAAPropid', 
-                   'lookupPROPID', 
-                   'tsepDATEOBS', 
-                   'addTimeToDATEOBS', 
-                   'DATEOBSfromDATE', 
-                   'DTCALDATfromDATEOBStus', 
-                   'DTCALDATfromDATEOBSchile', 
-                   'PROPIDtoDT', 
-                   'PROPIDplusCentury', 
-                   'INSTRUMEtoDT', 
-                   'IMAGTYPEtoOBSTYPE', 
-                   'bokOBSID']
+            enum: [
+            'fixTriplespec',
+            'trustHdrPropid',   # Propid from FITS header trumps schedule
+            'trustSchedPropid', # Propid from schedule trumps FITS header
+            'trustSchedOrAAPropid', # like trustSched but uses
+            # AAPropid if not in schedule
+            #!'lookupPROPID', 
+            #!'tsepDATEOBS', 
+            'addTimeToDATEOBS', # Use TIME-OBS for time part of DATE-OBS
+            'DATEOBSfromDATE', 
+            'DTCALDATfromDATEOBStus',   # utc DATEOBS vs local CALDAT
+            'DTCALDATfromDATEOBSchile', # utc DATEOBS vs local CALDAT
+            #!'PROPIDtoDT', 
+            'PROPIDplusCentury', # Create DTPROPID from PROPID by
+                                 # adding missing century
+            'INSTRUMEtoDT', 
+            'IMAGTYPEtoOBSTYPE', 
+            'bokOBSID',          # OBSID = bok23m.<DATE_OBS>
+            ]
       fpack:
         type:       str
         enum:       ['yes', 'no'] # default = None!!!
       test_resubmit:
-        type:       str
+        # If HDR alreay exists in iRODS and
+        #   < 1:: Log ERROR and abort attempt to ingest
+        #   ==1:: Log ERROR but try to ingest anyhow
+        #   > 1:: do NOT log ERROR and try to ingest anyhow
+        type:       int
       source:
         type:       str
-      warn_unknown:
-        type:       str
-      jobid_type:
+        enum:       ['pipeline', 'raw', 'dome']
+        # Source of FITS file (default='raw', 'raw'=='dome')
+#!      warn_unknown:
+#!        type:       str
+      jobid_type: # for modification to FITS basename
         type:       str  # ENUM!!!
         enum:       ['plain', 'seconds', 'False']

@@ -103,6 +103,7 @@ setup(
     entry_points={
         'console_scripts': [
             'fits_validate=tdvalid.fits_validate:main',
+            'valid_pers=tdvalid.personality_validate:main',
         ],
     },
 )
