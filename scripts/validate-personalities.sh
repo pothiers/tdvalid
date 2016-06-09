@@ -61,9 +61,9 @@ fi
 #!echo "Remaining arguments:"
 #!for arg do echo '--> '"\`$arg'" ; done
     
-pdir=${1:-$HOME/sandbox/tada-cli/personalities}
+pdir=${1:-/sandbox/tada-cli/personalities}
     
-schema=$HOME/sandbox/tdvalid/yamlschemas/personality-schema.yaml
+schema=/sandbox/tdvalid/yamlschemas/personality-schema.yaml
 
 ##############################################################################
 

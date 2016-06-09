@@ -35,7 +35,7 @@ mapping:
         enum:       ['90prime', 'andicam', 'arcon', 'bench', 'cosmos',
                     'decam', 'echelle', 'goodman', 'hdi', 'mosaic',
                     'mosaic3', 'newfirm', 'osiris', 'sami', 'soi',
-                    'spartan', 'triplespec', 'whirc']
+                    'spartan', 'triplespec', 'whirc', 'ARCOIRIS']
       DTSITE:
         type:       str
         enum:       ['cp', 'ct', 'kp']
